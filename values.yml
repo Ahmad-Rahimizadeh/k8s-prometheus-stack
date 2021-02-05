@@ -1,0 +1,28 @@
+prometheus:
+  server:
+    persistentVolume:
+      enabled: true
+  prometheusSpec:
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: manual
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 10Gi
+    securityContext:
+      runAsUser: 0
+      runAsGroup: 0
+      fsGroup: 0
+      runAsNonRoot: false
+grafana:
+  enabled: true
+  adminPassword: admin
+  persistence:
+    type: pvc
+    enabled: true
+    accessModes:
+    - ReadWriteOnce
+    size: 10Gi
+    existingClaim: "grafana"
